@@ -1,0 +1,136 @@
+import openpyxl
+import requests
+import time
+import json
+import os
+from bs4 import BeautifulSoup
+
+parse = dict
+
+wb = openpyxl.load_workbook('neww.xlsx')
+sheet = wb.active
+
+
+def parse_link(link):
+    response = requests.get(link)
+    soup = BeautifulSoup(response.content, 'html.parser')
+    # divs = soup.find_all('div', class_=['description', 'bodyArticle'])
+    article_text = ""
+    for paragraph in soup.find_all('p'):
+        article_text += paragraph.get_text()
+
+    return article_text
+
+
+# for row in sheet.iter_rows(values_only=True):
+#     cnt+=1
+#     if cnt == 0:
+#         continue
+#     if cnt == 42:
+
+# js = openpyxl.load_workbook('data_file.json')
+# jsheet = js.active
+def foo():
+    politics = ""
+    econ = ""
+    sobytya = ""
+    ledi = ""
+    pogoda = ""
+    gadgets = ""
+    science = ""
+    socnetworks = ""
+    techno = ""
+    transport = ""
+    cinema = ""
+    society = ""
+    moda = ""
+    beauty = ""
+    recepts = ""
+    house = ""
+    person = ""
+    golovolomka = ""
+    brends = ""
+    tele = ""
+    law = ""
+    opros = ""
+    cnt = -1
+    for row in sheet.iter_rows(values_only=True):
+        cnt += 1
+        if cnt == 0:
+            continue
+        link = row[0]
+        try:
+            parsed_data = parse_link(link)
+            if row[1] == "Политика":
+                politics += parsed_data.replace('\xa0', ' ').lower()
+                politics += ' '
+            if row[1] == "Экономика":
+                econ += str(parsed_data).replace('\xa0', ' ').lower()
+                econ += ' '
+            if row[1] == "Общество":
+                society += parsed_data.replace('\xa0', ' ').lower()
+                society += ' '
+            if row[1] == "Закон и право":
+                law += parsed_data.replace('\xa0', ' ').lower()
+                law += ' '
+            if row[1] == "Кино":
+                cinema += parsed_data.replace('\xa0', ' ').lower()
+                cinema += ' '
+            if row[1] == "Телевидение":
+                tele += parsed_data.replace('\xa0', ' ').lower()
+                tele += ' '
+            if row[1] == "Персоны":
+                person += parsed_data.replace('\xa0', ' ').lower()
+                person += ' '
+            if row[1] == "События":
+                sobytya += parsed_data.replace('\xa0', ' ').lower()
+                sobytya += ' '
+            if row[1] == "Бренды":
+                brends += parsed_data.replace('\xa0', ' ').lower()
+                brends += ' '
+            if row[1] == "Наука":
+                science += parsed_data.replace('\xa0', ' ').lower()
+                science += ' '
+            if row[1] == "Гаджеты":
+                gadgets += parsed_data.replace('\xa0', ' ').lower()
+                gadgets += ' '
+            if row[1] == "Соцсети":
+                socnetworks += parsed_data.replace('\xa0', ' ').lower()
+                socnetworks += ' '
+            if row[1] == "Технологии":
+                techno += parsed_data.replace('\xa0', ' ').lower()
+                techno += ' '
+            if row[1] == "Опросы":
+                opros += parsed_data.replace('\xa0', ' ').lower()
+                opros += ' '
+            if row[1] == "Головоломки":
+                golovolomka += parsed_data.replace('\xa0', ' ').lower()
+                golovolomka += ' '
+            if row[1] == "Дом":
+                house += parsed_data.replace('\xa0', ' ').lower()
+                house += ' '
+            if row[1] == "Транспорт":
+                transport += parsed_data.replace('\xa0', ' ').lower()
+                transport += ' '
+            if row[1] == "Погода":
+                pogoda += parsed_data.replace('\xa0', ' ').lower()
+                pogoda += ' '
+            if row[1] == "Рецепты":
+                recepts += parsed_data.replace('\xa0', ' ').lower()
+                recepts += ' '
+            if row[1] == "Мода":
+                moda += parsed_data.replace('\xa0', ' ').lower()
+                moda += ' '
+            if row[1] == "Красота":
+                beauty += parsed_data.replace('\xa0', ' ').lower()
+                beauty += ' '
+        except:
+            pass
+
+            ans = [politics, econ, society, law, cinema, tele, person, sobytya, brends, science,
+                   gadgets, socnetworks, techno, opros, golovolomka, house, transport, pogoda,
+                   recepts, moda, beauty]
+            return ans
+
+y = foo()
+print(y)
