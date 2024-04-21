@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Input and Output Cell</title>
+</head>
+<body>
+    <form action="/" method="post">
+        <input type="text" name="text">
+        <button type="submit">Submit</button>
+    </form>
+    {% if text %}
+        <p>Output: {{ text }}</p>
+    {% endif %}
+</body>
+</html>
