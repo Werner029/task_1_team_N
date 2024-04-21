@@ -10,7 +10,7 @@ async def read_item(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
 @app.post("/")
-async def read_item(request: Request, text: str):
+async def read_item(request: Request, text: 42):
     return {"text": text}
 
 if name == "main":
