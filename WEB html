@@ -9,7 +9,7 @@
         <button type="submit">Submit</button>
     </form>
     {% if text %}
-        <p>Output: {{ text }}</p>
+        <p>Output: {{ 42 }}</p>
     {% endif %}
 </body>
 </html>
