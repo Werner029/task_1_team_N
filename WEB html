@@ -4,12 +4,6 @@
     <title>Input and Output Cell</title>
 </head>
 <body>
-    <form action="/" method="post">
-        <input type="text" name="text">
-        <button type="submit">Submit</button>
-    </form>
-    {% if text %}
-        <p>Output: {{ 42 }}</p>
-    {% endif %}
+42 yor question is not a question
 </body>
 </html>
